@@ -3,7 +3,8 @@ import pandas as pd
 import sys
 import time
 
-def nmap_scan(target, scanner):
+# scans for open ports
+def port_scan(target, scanner):
     scanner.scan(target, arguments="-F")
     results = []
     
@@ -26,6 +27,7 @@ def nmap_scan(target, scanner):
     else:
         return f"Nmap Scan Results for {target}:\n\n" + results + "\n"
 
+# scans operating system
 def os_detection_scan(target, scanner):
     try:
         result = scanner.scan(target, '5000', arguments='-O')
@@ -53,22 +55,25 @@ if __name__ == "__main__":
     # initial status scan
     nm_scanner = nm_scan.scan(target, '5000', arguments='-Pn')
     host_results = f"The host {target} is " + nm_scanner['scan'][target]['status']['state'] + "\n\n"
+    print(host_results, end = "")
 
     # nmap scan
-    scan_results = nmap_scan(target, nm_scan)
+    scan_results = port_scan(target, nm_scan)
+    print(scan_results, end = "")
 
     # os detection scan
     os_results = os_detection_scan(target, nm_scan)
+    print(os_results, end = "")
 
     # timestamp
-    timestamp = "Report generated " + time.strftime("%Y-%m-%d_%H:%M:%S GMT", time.gmtime())
-
-    #print results
-    print(host_results + scan_results + os_results + timestamp)
+    time.sleep(1)
+    timestamp = "Report generated at " + time.strftime("%Y-%m-%d_%H:%M:%S GMT", time.gmtime())
+    print(timestamp)
 
     # write results to file
     if to_file == 'Y':
         with open(f"{sys.argv[1]}_scan.txt", 'w') as file:
             file.write(host_results + scan_results + os_results + timestamp)
-
+    
+    time.sleep(1)
     print("\nFinished.\n")
