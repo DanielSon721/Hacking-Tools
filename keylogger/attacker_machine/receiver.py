@@ -11,7 +11,7 @@ def receive_file():
         return 'No file part', 400
     file = request.files['file']
     filename = file.filename
-    save_path = os.path.join("loot", filename)
+    save_path = os.path.join(os.getcwd(), filename)
     file.save(save_path)
     return 'File received', 200
 

