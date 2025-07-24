@@ -1,0 +1,22 @@
+The host 104.20.21.246 is up
+
+Nmap Scan Results for 104.20.21.246:
+
+            Host  Port Protocol State   Method
+0  104.20.21.246    80      tcp  open  syn-ack
+1  104.20.21.246   443      tcp  open  syn-ack
+2  104.20.21.246  8080      tcp  open  syn-ack
+3  104.20.21.246  8443      tcp  open  syn-ack
+
+There is a(n) 100% chance that the host is running Linux 4.4.
+
+Summary:  Web server (ports 80, 443, 8080, 8443 open). Likely Linux.
+
+Vulnerabilities:  Numerous potential web server vulnerabilities (depending on software).  Outdated Linux kernel (4.4) may have exploits.
+
+Attack Techniques: Web app attacks (SQLi, XSS, etc.), kernel exploits.
+
+Exploit Likelihood: Moderate to High (depends on specific software versions).
+
+Remediation: Update Linux kernel, web server software, and apply all security patches.  Perform regular vulnerability scans.
+Report generated at 2025-07-24_08:09:33 GMT

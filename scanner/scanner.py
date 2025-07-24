@@ -2,6 +2,14 @@ import nmap
 import pandas as pd
 import sys
 import time
+import google.generativeai as genai
+
+genai.configure(api_key="API KEY") 
+
+def ai_analysis(prompt):
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
+    return response.text
 
 # scans for open ports
 def port_scan(target, scanner):
@@ -65,6 +73,13 @@ if __name__ == "__main__":
     os_results = os_detection_scan(target, nm_scan)
     print(os_results, end = "")
 
+    time.sleep(1)
+    print("Passing results to Gemini AI...\n")
+
+    ai_results = ai_analysis("Analyze this nmap scan. Give me a quick summary, possible vulnerabilities, possible attack techniques, exploitation likelihood, and suggested remediation. Keep it simple. Less than 1000 characters.\n" + scan_results + os_results)
+
+    print(ai_results)
+
     # timestamp
     time.sleep(1)
     timestamp = "Report generated at " + time.strftime("%Y-%m-%d_%H:%M:%S GMT", time.gmtime())
@@ -73,7 +88,7 @@ if __name__ == "__main__":
     # write results to file
     if to_file == 'Y':
         with open(f"{sys.argv[1]}_scan.txt", 'w') as file:
-            file.write(host_results + scan_results + os_results + timestamp)
+            file.write(host_results + scan_results + os_results + ai_results + timestamp)
     
     time.sleep(1)
     print("\nFinished.\n")
