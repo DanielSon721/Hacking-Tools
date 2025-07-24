@@ -2,7 +2,7 @@ These are my hacking tools made in Python!
 
 NMAP SCANNER:
 
-This script scans the inputted IP address to check its status (up/down), open ports, and the operating system that it is running on.
+This script scans the inputted IP address to check its status (up/down), open ports, and the operating system that it is running on. The results are then passed on to Gemini AI to analyze vulnerabilities, attack vectors, and recommended remediations.
 
 This script should be used with the following Linux command:
 
