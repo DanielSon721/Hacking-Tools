@@ -10,13 +10,14 @@ Nmap Scan Results for 104.20.21.246:
 
 There is a(n) 100% chance that the host is running Linux 4.4.
 
-Summary:  Ports 80, 443, 8080, and 8443 are open, suggesting web servers (HTTP, HTTPS) and potentially other applications.  Linux 4.4 is detected.
+Summary:  Ports 80, 443, 8080, and 8443 are open, suggesting web servers (HTTP, HTTPS) and possibly additional applications.  Linux 4.4 is identified, which is outdated and vulnerable.
 
-Possible Vulnerabilities:  Outdated OS (Linux 4.4) increases risk of known exploits targeting older kernels.  Unpatched web servers on ports 80, 443, 8080, 8443 are highly vulnerable.
+Possible Vulnerabilities:  Outdated OS, potential web server vulnerabilities (depending on software versions).
 
-Possible Attacks:  Exploiting kernel vulnerabilities (via OS-specific exploits), web server exploits (e.g., SQL injection, cross-site scripting), brute force attacks.
+Possible Attacks:  Exploiting OS vulnerabilities (e.g., kernel exploits), web server attacks (e.g., SQL injection, XSS).
 
-Exploitation Likelihood: High, due to open ports and outdated OS.
+Exploitation Likelihood: Moderate to High (due to outdated OS).
 
-Remediation: Update Linux kernel immediately.  Apply all security patches to web servers.  Implement strong passwords and enable web application firewalls (WAFs).
-Report generated at 2025-07-24_08:21:04 GMT
+Remediation:  Update the Linux kernel immediately.  Update web server software (Apache, Nginx, etc.) and apply all security patches.  Conduct thorough vulnerability scans and penetration testing.
+
+Report generated at 2025-07-24_08:25:03 GMT

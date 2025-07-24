@@ -76,9 +76,9 @@ if __name__ == "__main__":
     time.sleep(1)
     print("Passing results to Gemini AI...\n")
 
-    ai_results = ai_analysis("Analyze this nmap scan. Give me a quick summary, possible vulnerabilities, possible attack techniques, exploitation likelihood, and suggested remediation. Keep it simple. Less than 1200 characters.\n" + scan_results + os_results)
+    ai_results = ai_analysis("Analyze this nmap scan. Give me a quick summary, possible vulnerabilities, possible attack techniques, exploitation likelihood, and suggested remediation. Keep it simple. Less than 1200 characters.\n" + scan_results + os_results) + '\n'
 
-    print(ai_results)
+    print(ai_results, end = "")
 
     # timestamp
     time.sleep(1)
