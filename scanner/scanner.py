@@ -4,7 +4,7 @@ import sys
 import time
 import google.generativeai as genai
 
-genai.configure(api_key="API KEY") 
+genai.configure(api_key="AIzaSyBNSdzgxptmnLVGLtUm3URS6p_FdB2ddqU") 
 
 def ai_analysis(prompt):
     model = genai.GenerativeModel("gemini-1.5-flash")

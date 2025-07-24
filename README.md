@@ -14,6 +14,8 @@ This code captures your keystrokes and writes them to a local text file. Every 1
 
 The receiver.py must be running on the attacker machine and keylogger.py must be running on the victim machine.
 
+The attacker machine will see a file named keylog.txt containing the exfiltrated keystrokes.
+
 BRUTE FORCE PASSWORD CRACKER:
 
 This script brute forces password guessing, testing over 80 million combinations in the span of 10 seconds.
