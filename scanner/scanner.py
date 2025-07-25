@@ -15,7 +15,7 @@ def ai_analysis(prompt):
 def port_scan(target, scanner):
     scanner.scan(target, arguments="-F")
     results = []
-    
+
     for host in scanner.all_hosts():
         for proto in scanner[host].all_protocols():
             for port in scanner[host][proto].keys():
@@ -28,12 +28,11 @@ def port_scan(target, scanner):
                     "State": port_data["state"],
                     "Method": f"{reason}"
                 })
-    results = pd.DataFrame(results).to_string()
 
     if not results:
-        return "No open ports detected.\n\n"
+        return f"No open ports detected on {target}.\n\n"
     else:
-        return f"Nmap Scan Results for {target}:\n\n" + results + "\n"
+        return f"Nmap Scan Results for {target}:\n\n" + pd.DataFrame(results).to_string() + "\n\n"
 
 # scans operating system
 def os_detection_scan(target, scanner):
@@ -43,9 +42,9 @@ def os_detection_scan(target, scanner):
             guessed_os = result['scan'][target]['osmatch'][0]
             accuracy = guessed_os.get('accuracy', '?')
             name = guessed_os.get('name', 'Unknown OS')
-            return f"\nThere is a(n) {accuracy}% chance that the host is running {name}.\n\n"
+            return f"There is a(n) {accuracy}% chance that the host is running {name}.\n\n"
         else:
-            return "\nOS detection failed or returned no results.\n\n"
+            return "OS detection failed or returned no results.\n\n"
     except Exception as e:
         return f"Error during OS detection: {e}\n\n"
 
