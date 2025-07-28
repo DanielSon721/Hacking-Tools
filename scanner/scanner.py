@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     to_file = input("\nWrite results to a file? (Y/N): ")
 
-    print('\nRunning...\n')
+    print(f"{"\033[34m"}\nScanning with Nmap...\n{"\033[0m"}")
 
     target = sys.argv[1]
     nm_scan = nmap.PortScanner()
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     print(os_results, end = "")
 
     time.sleep(1)
-    print("Passing results to Gemini AI...\n")
+    print(f"{"\033[35m"}Passing results to Gemini AI...\n{"\033[0m"}")
 
     ai_results = ai_analysis("Analyze this nmap scan. Give me a quick summary, possible vulnerabilities, possible attack techniques, exploitation likelihood, and suggested remediation. Keep it simple. Less than 1200 characters.\n" + scan_results + os_results) + '\n'
 
@@ -81,13 +81,16 @@ if __name__ == "__main__":
 
     # timestamp
     time.sleep(1)
-    timestamp = "Report generated at " + time.strftime("%Y-%m-%d_%H:%M:%S GMT", time.gmtime())
+    print(f"{"\033[36m"}Time of report:\n{"\033[0m"}")
+    timestamp = "Report generated at " + time.strftime("%Y-%m-%d_%H:%M:%S GMT", time.gmtime()) + "\n"
     print(timestamp)
 
     # write results to file
     if to_file == 'Y':
         with open(f"{sys.argv[1]}_scan.txt", 'w') as file:
             file.write(host_results + scan_results + os_results + ai_results + timestamp)
+        time.sleep(1)
+        print(f"{"\033[32m"}Saved report to {sys.argv[1]}_scan.txt.\n{"\033[0m"}")
     
     time.sleep(1)
-    print("\nFinished.\n")
+    print(f"{"\033[31m"}Finished.\n{"\033[0m"}")
