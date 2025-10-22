@@ -3,15 +3,18 @@ from cryptography.fernet import Fernet
 
 files = []
 
+# enumerates every file in directory
 for file in os.listdir():
     if file == "ransomware.py" or file == "secret_key.key" or file == "decrypt.py":
         continue
     if os.path.isfile(file):
         files.append(file)
 
+# gets key
 with open("secret_key.key", "rb") as key:
     secret_key = key.read()
 
+# decrypts files with key
 for file in files:
     with open(file, "rb") as target:
         contents = target.read()
